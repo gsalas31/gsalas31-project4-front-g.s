@@ -3,9 +3,9 @@
     <div id="intro_landing_page_first_part">
         <div id="first_content">
             <h1 class="name_of_app">FANTASY FOAMI</h1>
-            <h2 class="slogan">We create</h2>
-            <h2 class="slogan">We deliver</h2>
-            <h2 class="slogan">You enjoy</h2>
+            <h2 class="slogan">Create</h2>
+            <h2 class="slogan">Share</h2>
+            <h2 class="slogan">Enjoy</h2>
             <p id="description_intro"> A little descritption of the app</p>
         </div>
     </div>
@@ -15,7 +15,7 @@
     <div id="intro_sencond_part">
         <div class="second_part_benefits">
             <div id="characteristic_one">
-                <h2>Have our products ready  for your special occasions</h2>
+                <h2>Have your products displayed and ready for others to see </h2>
                 <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Exercitationem cumque repellat vitae illum labore sunt dignissimos! .</p>
             </div>
             <div id="image_description_one">

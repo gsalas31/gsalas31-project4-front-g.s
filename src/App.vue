@@ -1,10 +1,10 @@
 <template>
   <div id="app">
     <div id="nav">
-      <Header v-bind:URL="URL" v-bind:loggedIn="loggedIn" @logout="logout" />
+      <Header v-bind:URL="URL" v-bind:token="token" v-bind:loggedIn="loggedIn" @logout="logout"/>
     </div>
-    <router-view @loggedIn="login($event)"/>
-    <Footer/>
+    <router-view @loggedIn="login($event)" @register="register($event)"/>
+      <Footer/>
   </div>
 </template>
 
@@ -31,7 +31,7 @@ export default {
       this.loggedIn = true;
       this.token = event.token;
       this.$router.push({ 
-        path: 'Main', 
+        path: '/Products', 
         query: { token: this.token, URL: this.URL },
       });
     },
@@ -40,29 +40,35 @@ export default {
       this.token = {};
       this.$router.push('/')
     },
-  } 
+    register: function(event){
+      this.loggedIn = true,
+      this.token = event.token
+      this.$router.push({ 
+         path: '/Products',
+         query: { token: this.token, URL: this.URL }
+      });
+   } 
+ }
 }
 </script>
 
 <style>
 #app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
+  font-family:Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
   color: #2c3e50;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+  width: 100vw;
+  height: 100vh;
 }
-
 #nav {
-  padding: 30px;
+  width: 100vw;
+  font-family: 'Roboto', sans-serif;
 }
 
-#nav a {
-  font-weight: bold;
-  color: #2c3e50;
-}
-
-#nav a.router-link-exact-active {
-  color: #2c3e50;
-}
 </style>

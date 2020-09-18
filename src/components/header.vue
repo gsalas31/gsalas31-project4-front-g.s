@@ -1,10 +1,5 @@
 <template>
-  <div class="header">
     <b-navbar>
-      <template slot="logo">
-        <!-- <img/> -->
-     
-      </template>
       <template slot="start">
         <b-navbar-item href="#">
           <router-link to="/" id="home">Home</router-link>
@@ -12,19 +7,19 @@
         <b-navbar-item href="#">
           <router-link to="/Products">Products</router-link>
         </b-navbar-item>
-   
       </template>
 
       <template slot="end">
         <b-navbar-item tag="div">
           <div class="buttons">
-            <router-link :to="{name: 'Login', query: {URL: this.URL}}" v-bind:URL="URL" v-if="!loggedIn"><b-button type="is-danger">Log in</b-button></router-link>  <!--if logged in is not true, show the login button -->
+            <router-link :to="{ name: 'Register', query: { URL: this.URL }}" v-if="!loggedIn" v-bind:URL="URL"><b-button type="is-danger">Register</b-button></router-link>
+            
+            <router-link :to="{name: 'Login', query: {URL: this.URL}}" v-bind:URL="URL" v-if="!loggedIn"><b-button type="is-danger">Log in</b-button></router-link>
             <b-button v-if="loggedIn" class="button is-link" @click="logout" type="is-success">Logout</b-button>
           </div>
         </b-navbar-item>
       </template>
     </b-navbar>
-  </div>
 </template>
 
 <script>
@@ -42,19 +37,12 @@ export default {
 
 <style>
 nav{
-    width:80%;
+    width:100%;
     margin-left: auto;
     margin-right: auto;
     margin-top: 10px;
-    margin-botton:10px;
-}
-.header{
-  top: 0;
-  height: 72px;
-  background-color: #232653;
-  position: fixed;
-  z-index: 20;
-  width: 90%;
-  padding:0
+    background-color: #232653;
+    position: fixed;
+    z-index: 20;
 }
 </style>
