@@ -1,6 +1,5 @@
 <template>
     <div class="for_signup">
-
                 <div class="actual_form">
 
                     <h2 id="h2_signup">Sign Up</h2>
