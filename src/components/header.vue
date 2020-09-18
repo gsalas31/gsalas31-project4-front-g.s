@@ -45,7 +45,13 @@ nav{
     width:80%;
     margin: 10px auto;
 }
-
-
+.header{
+  top: 0;
+  height: 72px;
+  background-color: #232653;
+  position: fixed;
+  width: 100%;
+  z-index: 20;
+}
 
 </style>
