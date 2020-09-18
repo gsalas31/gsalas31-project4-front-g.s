@@ -10,10 +10,7 @@
           <router-link to="/" id="home">Home</router-link>
         </b-navbar-item>
         <b-navbar-item href="#">
-          <router-link to="/Main">Category</router-link>
-        </b-navbar-item>
-        <b-navbar-item href="#">
-          <router-link to="/Note">Note</router-link>
+          <router-link to="/Products">Products</router-link>
         </b-navbar-item>
    
       </template>
@@ -21,7 +18,6 @@
       <template slot="end">
         <b-navbar-item tag="div">
           <div class="buttons">
-            <b-button type="is-danger">Sign Up</b-button>
             <router-link :to="{name: 'Login', query: {URL: this.URL}}" v-bind:URL="URL" v-if="!loggedIn"><b-button type="is-danger">Log in</b-button></router-link>  <!--if logged in is not true, show the login button -->
             <b-button v-if="loggedIn" class="button is-link" @click="logout" type="is-success">Logout</b-button>
           </div>
