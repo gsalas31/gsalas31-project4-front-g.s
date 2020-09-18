@@ -84,7 +84,7 @@ export default {
                 if (data) {
                 this.$emit('loggedIn', data)
                 } else {
-                    alert('In correct login')
+                    alert('Incorrect login')
                 }
             });
         },
@@ -106,15 +106,6 @@ export default {
     background-repeat: no-repeat;
     padding:50px;
 }
-/* .back_form{
-    background-color:white;
-    text-align: center;
-    width:70%;
-    opacity: 0.4;
-    margin-left: auto;
-    margin-right: auto;
-    
-} */
 .actual_form{
     margin:0;
     padding:60px;

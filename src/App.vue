@@ -1,6 +1,8 @@
 <template>
   <div id="app">
-    <Header/> 
+    <div id="nav">
+      <Header v-bind:URL="URL" v-bind:loggedIn="loggedIn" @logout="logout" />
+    </div>
     <router-view @loggedIn="login($event)"/>
     <Footer/>
   </div>
@@ -61,6 +63,6 @@ export default {
 }
 
 #nav a.router-link-exact-active {
-  color: #f4ff56;
+  color: #2c3e50;
 }
 </style>
