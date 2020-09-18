@@ -23,6 +23,7 @@
 </template>
 
 <script>
+
 export default {
   name: "Header",
   props: ['URL', 'loggedIn'],
@@ -36,7 +37,7 @@ export default {
 
 
 <style>
-nav{
+/* nav{
     width:100%;
     margin-left: auto;
     margin-right: auto;
@@ -44,5 +45,5 @@ nav{
     background-color: #232653;
     position: fixed;
     z-index: 20;
-}
+} */
 </style>
