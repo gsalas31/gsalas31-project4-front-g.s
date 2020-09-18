@@ -1,49 +1,53 @@
 <template>
+
   <div class="maincontainer">
+
     <div class="for_login">
+
         <h1 class="name_of_app_login">Fantasy Foami</h1>
         <h3 id="h3_login">Please login or sign-up for an account</h3>
+
+        <label for='username'>Username</label>
         <input type="text" class="input is-primary" v-model="username"/>
+
+        <label for='password'>Password</label>
         <input type="password" class="input is-primary" v-model="password"/>
+
         <br/>
         <button class="button is-primary" @click="handleLogin">Log In</button>
+
     </div>
 
 
     <div class="for_signup">
-        <div class="back_form">
+
             <div class="actual_form">
+
                 <h2 id="h2_signup">Sign Up</h2>
                 <h3 id="h3_signup">Already have an account? Sign-in</h3>
-                <b-field label="Name">
-                    <b-input value="Kevin"></b-input>
-                </b-field>
-                <b-field label="Last">
-                    <b-input value="Garvey"></b-input>
-                </b-field>
-                <b-field label="Username"
-                    type="is-success"
-                    message="This username is available">
-                    <b-input value="johnsilver" maxlength="30"></b-input>
-                </b-field>
-                <b-field label="Email"
-                    type="is-danger"
-                    message="This email is invalid">
-                    <b-input type="email"
-                        value="john@"
-                        maxlength="30">
-                    </b-input>
-                </b-field>
 
-                <b-field label="Password"
-                    type="is-warning"
-                    :message="['Password is too short', 'Password must have at least 8 characters']">
-                    <b-input value="123" type="password" maxlength="30"></b-input>
-                </b-field>
-            </div>   
-        </div>
+                 <label for='first_name'>First Name</label>
+                <input class='input' type='text' v-model='first_name'/>
+                
+                <label for='last_name'>Last name</label>
+                <input class='input is-primary' type='text' v-model='last_name'/>
+                     
+                <label for='username'>Username</label>
+                <input class='input' type='text' v-model='username'/>
+
+                <label for='email'>Email</label>
+                <input class='input is-primary' type='email' v-model='email'/> 
+
+                <label for='password'>Password</label>
+                <input class='input is-primary' type='password' v-model='password'/>
+
+                <button class="button is-primary">Sign Up</button>
+
+            </div> 
     </div>
+
   </div>
+
 </template>
 
 
