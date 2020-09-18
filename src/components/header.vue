@@ -1,46 +1,49 @@
 <template>
+  <div class="header">
     <b-navbar>
-        <template slot="brand">
-            <b-navbar-item tag="router-link" :to="{ path: '/' }">
-              Fantasy Foami
-            </b-navbar-item>
-        </template>
-        <template slot="start">
-            <b-navbar-item href="#">
-                <router-link to="/">Home</router-link>
-            </b-navbar-item>
-            <b-navbar-item href="#">
-                <router-link to="/about">About</router-link>
-            </b-navbar-item>
-            <b-navbar-dropdown label="Info">
-                <b-navbar-item href="#">
-                    About
-                </b-navbar-item>
-                <b-navbar-item href="#">
-                    Contact
-                </b-navbar-item>
-            </b-navbar-dropdown>
-        </template>
+      <template slot="logo">
+        <!-- <img/> -->
+     
+      </template>
+      <template slot="start">
+        <b-navbar-item href="#">
+          <router-link to="/" id="home">Home</router-link>
+        </b-navbar-item>
+        <b-navbar-item href="#">
+          <router-link to="/Main">Category</router-link>
+        </b-navbar-item>
+        <b-navbar-item href="#">
+          <router-link to="/Note">Note</router-link>
+        </b-navbar-item>
+   
+      </template>
 
-        <template slot="end">
-            <b-navbar-item tag="div">
-                <div class="buttons">
-                    <router-link to="/login">Log in</router-link>
-                </div>
-            </b-navbar-item>
-        </template>
+      <template slot="end">
+        <b-navbar-item tag="div">
+          <div class="buttons">
+            <b-button type="is-danger">Sign Up</b-button>
+            <router-link :to="{name: 'Login', query: {URL: this.URL}}" v-bind:URL="URL" v-if="!loggedIn"><b-button type="is-danger">Log in</b-button></router-link>  <!--if logged in is not true, show the login button -->
+            <b-button v-if="loggedIn" class="button is-link" @click="logout" type="is-success">Logout</b-button>
+          </div>
+        </b-navbar-item>
+      </template>
     </b-navbar>
+  </div>
 </template>
 
 <script>
-export default{
-    name: 'Header'
+export default {
+  name: "Header",
+  props: ['URL', 'loggedIn'],
+  methods: {
+    logout: function(){
+      this.$emit('logout')
+    }
+  }
 }
-
-
-
-
 </script>
+
+
 <style>
 nav{
     width:80%;
