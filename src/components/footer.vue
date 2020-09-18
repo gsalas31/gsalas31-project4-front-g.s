@@ -13,6 +13,11 @@ export default{
 
 </script>
 <style>
+.footer{
+    background-color: #232653;
+    height: 80px;
+    width: 100%;
+}
 </style>
 
 

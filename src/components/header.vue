@@ -43,15 +43,18 @@ export default {
 <style>
 nav{
     width:80%;
-    margin: 10px auto;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 10px;
+    margin-botton:10px;
 }
 .header{
   top: 0;
   height: 72px;
   background-color: #232653;
   position: fixed;
-  width: 100%;
   z-index: 20;
+  width: 90%;
+  padding:0
 }
-
 </style>
