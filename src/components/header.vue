@@ -2,7 +2,7 @@
     <b-navbar>
       <template slot="start">
         <b-navbar-item href="#">
-          <router-link to="/" id="home">Home</router-link>
+          <router-link to="/">Home</router-link>
         </b-navbar-item>
         <!-- <b-navbar-item href="#">
           <router-link to="/Products">Products</router-link>
@@ -11,11 +11,11 @@
 
       <template slot="end">
         <b-navbar-item tag="div">
-          <div class="buttons">
-            <router-link :to="{ name: 'Register', query: { URL: this.URL }}" v-if="!loggedIn" v-bind:URL="URL"><b-button type="is-danger">Register</b-button></router-link>
+          <div >
+            <router-link :to="{ name: 'Register', query: { URL: this.URL }}" v-if="!loggedIn" v-bind:URL="URL"><b-button type="button is-primary">Register</b-button></router-link>
             
-            <router-link :to="{name: 'Login', query: {URL: this.URL}}" v-bind:URL="URL" v-if="!loggedIn"><b-button type="is-danger">Log in</b-button></router-link>
-            <b-button v-if="loggedIn" class="button is-link" @click="logout" type="is-success">Logout</b-button>
+            <router-link :to="{name: 'Login', query: {URL: this.URL}}" v-bind:URL="URL" v-if="!loggedIn"><b-button type="button is-primary">Log in</b-button></router-link>
+            <b-button v-if="loggedIn" class="button is-link" @click="logout" type="button is-info">Logout</b-button>
           </div>
         </b-navbar-item>
       </template>
@@ -37,5 +37,14 @@ export default {
 
 
 <style>
-
+.navbar-item{
+  display: flex;
+  justify-content: center;
+}
+.is-primary{
+  margin:10px;
+}
+.navbar-item{
+  font-size: 30px;
+}
 </style>

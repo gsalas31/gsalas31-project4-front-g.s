@@ -8,9 +8,9 @@
             <button class=" edit button is-primary" >Edit</button>
             <!-- <button class=" edit button is-primary" @click="deleteCategory"> Delete </button> -->
         </div>
-        <ul>
+        <ul class="category_buttons">
             <li v-for="category of categories" v-bind:key="category.id">
-            <div class=green >{{category.name}}</div>
+            <button class="button is-info" id= "green" >{{category.name}}</button>
             </li>
         </ul>
 
@@ -27,7 +27,9 @@ export default{
     data: function(){
         return{
             categories:[],
-            name:''
+            name:'',
+            products:[],
+            comments:[],
         }
     },
     created: function(){
@@ -35,16 +37,14 @@ export default{
     },
     methods:{
     newCategory: function(){
-      const { token, URL } = this.$route.query;
+      const {token, URL} = this.$route.query
       fetch(`${URL}/api/categories/`, {
-        method: "post",
+        method: 'post',
         headers: {
-          authorization: `JWT ${token}`,
-          "Content-Type": "application/json",
+           "Content-Type": "application/json", 
+            authorization: `JWT ${token}`
         },
-        body: JSON.stringify({ 
-          name: this.name
-          })
+        body: JSON.stringify({ name: this.name})
       })
       .then(() => {
         this.getCategories()
@@ -161,6 +161,7 @@ li{
 .field_for_category{
     display:flex;
     flex-direction: row;
+    justify-content: center;
 }
 .create, .edit, .delete {
     margin-left: 20px;
@@ -170,7 +171,19 @@ li{
     width: 82px;
     height: 40px;
 }
-.green{
-    color:green
+#green{
+    color:white;
+    width:auto;
+    margin:10px;
 }
+.category_buttons{
+    display:flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    margin-top: 20px;
+    justify-content: center;
+
+
+}
+
 </style>

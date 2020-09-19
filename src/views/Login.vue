@@ -70,7 +70,7 @@ export default {
 }
 
 .name_of_app_login{
-   color:#232653;
+   color:#7957d5;
    text-align: center;
    margin-bottom: 10px;
    font-size: 30px;
@@ -85,5 +85,8 @@ export default {
 
 .input{
     margin:10px;
+}
+label{
+    color:#7957d5;
 }
 </style>

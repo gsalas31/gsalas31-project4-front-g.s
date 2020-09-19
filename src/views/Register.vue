@@ -85,7 +85,7 @@ export default {
     justify-content: center;
 }
 #h2_signup{
-    color: #232653;
+    color:#7957d5;
     text-align: center;
     margin-bottom: 10px;
     font-size: 30px;
