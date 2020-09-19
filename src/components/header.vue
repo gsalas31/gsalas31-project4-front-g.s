@@ -4,9 +4,9 @@
         <b-navbar-item href="#">
           <router-link to="/" id="home">Home</router-link>
         </b-navbar-item>
-        <b-navbar-item href="#">
+        <!-- <b-navbar-item href="#">
           <router-link to="/Products">Products</router-link>
-        </b-navbar-item>
+        </b-navbar-item> -->
       </template>
 
       <template slot="end">
@@ -37,13 +37,5 @@ export default {
 
 
 <style>
-/* nav{
-    width:100%;
-    margin-left: auto;
-    margin-right: auto;
-    margin-top: 10px;
-    background-color: #232653;
-    position: fixed;
-    z-index: 20;
-} */
+
 </style>

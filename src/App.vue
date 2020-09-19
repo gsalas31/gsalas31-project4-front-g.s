@@ -31,7 +31,7 @@ export default {
       this.loggedIn = true;
       this.token = event.token;
       this.$router.push({ 
-        path: '/Products', 
+        path: 'Products', 
         query: { token: this.token, URL: this.URL },
       });
     },
@@ -44,7 +44,7 @@ export default {
       this.loggedIn = true,
       this.token = event.token
       this.$router.push({ 
-         path: '/Products',
+         path: 'Register',
          query: { token: this.token, URL: this.URL }
       });
    } 
@@ -58,7 +58,6 @@ export default {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
-  color: #2c3e50;
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
@@ -70,5 +69,6 @@ export default {
   width: 100vw;
   font-family: 'Roboto', sans-serif;
 }
+
 
 </style>

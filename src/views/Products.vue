@@ -1,27 +1,104 @@
 <template>
-  <div id="non_member">
+  <div id="container_products">
         <!-- <div id="decorative_image"></div> -->
-        <h2 id="h2_shopping">Shop by Category</h2>
-        <div class="shopping_by_category">
-          <ul id="options_products">
-            <li id="school">Back to School</li>
-            <li id="home">Home Decor</li>
-            <li id="christmas">Christmas</li>
-            <li id="birthday">Birthdays</li>
-            <li id="other">Other Occassions</li>
-          </ul>
+        <h2 id="h2_shopping">Create your category</h2>
+        <div class="field_for_category">
+            <b-input placeholder="Enter you category..."></b-input>
+            <button class=" create button is-primary" @click="newCategory" >Create</button>
+            <button class=" edit button is-primary" >Edit</button>
+            <!-- <button class=" edit button is-primary" @click="deleteCategory"> Delete </button> -->
         </div>
-        <div id="products_container">
+        <ul>
+            <li v-for="category of categories" v-bind:key="category.id">
+            <div class=green >{{category.name}}</div>
+            </li>
+        </ul>
+
+
+        <div class="categories_list">
+      
         </div>
+  
   </div>
 </template>
 <script>
+export default{
+    name: 'Products',
+    data: function(){
+        return{
+            categories:[],
+            name:''
+        }
+    },
+    created: function(){
+        this.getCategories()
+    },
+    methods:{
+    newCategory: function(){
+      const { token, URL } = this.$route.query;
+      fetch(`${URL}/api/categories/`, {
+        method: "post",
+        headers: {
+          authorization: `JWT ${token}`,
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ 
+          name: this.name
+          })
+      })
+      .then(() => {
+        this.getCategories()
+        // this.name = ''
+      });
+    },
+    getCategories: function(){
+        const {token, URL} = this.$route.query
+        fetch(`${URL}/api/categories/`, {
+            method: 'get',
+            headers: {
+                authorization: `JWT ${token}`,
+            }
+        })
+        .then((response) => response.json())
+        .then((data) => {
+            this.categories = data
+            console.log(data)
+        })
+    }
+//     editCategory: function(){
+//         const {token, URL} = this.$route.query
+//         const id = this.editid
+//         fetch(`${URL}/api/categories/${id}/`, {
+//         method: "put",
+//         headers: {
+//             authorization: `jwt ${token}`,
+//             "Content-Type": "application/json"
+//             },
+//          body: JSON.stringify({title: this.edittitle})
+//         })
+//         .then(() => {
+//         this.getCategory();
+//         })
+//     },
+//     deleteCategory: function(event){
+//         const {token, URL} = this.$route.query;
+//         const id = event.target.id;
 
+//         fetch(`${URL}/api/categories/${id}/`, {
+//             method: "delete",
+//             headers: {
+//                 authorization: `JWT ${token}`,
+//                 "Content-Type": "application/json",
+//             },
+//         })
+//         .then(() => {
+//             this.getCategories();
+//         })
+//   }
 
-
-
-
-
+//   }
+    }
+}
 </script>
 <style>
 /* #decorative_image{
@@ -80,5 +157,20 @@ li{
     flex-direction: column;
     margin-left: auto;
     margin-right: auto;
+}
+.field_for_category{
+    display:flex;
+    flex-direction: row;
+}
+.create, .edit, .delete {
+    margin-left: 20px;
+    padding: 7px 11px;
+    margin: 10px;
+    margin-left: 20px;
+    width: 82px;
+    height: 40px;
+}
+.green{
+    color:green
 }
 </style>
