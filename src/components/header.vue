@@ -2,7 +2,7 @@
     <b-navbar>
       <template slot="start">
         <b-navbar-item href="#">
-          <router-link to="/">Home</router-link>
+          <router-link to="/">Fantasy Foami</router-link>
         </b-navbar-item>
         <!-- <b-navbar-item href="#">
           <router-link to="/Products">Products</router-link>
