@@ -44,8 +44,8 @@ export default {
       this.loggedIn = true,
       this.token = event.token
       this.$router.push({ 
-         path: 'Register',
-         query: { token: this.token, URL: this.URL }
+         path: 'Products',
+         query: { token: this.token, URL: this.URL },
       });
    } 
  }

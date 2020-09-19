@@ -20,7 +20,7 @@
                     <label for='password'>Password</label>
                     <input class='input is-primary' type='password' v-model='password'/>
 
-                    <button class="input is-primary" to="/Products" @click="handleRegister">Register</button>
+                    <button class="button is-primary" to="/Products" @click="handleRegister">Register</button>
 
                 </div> 
         </div>    
@@ -41,7 +41,7 @@ export default {
     },
     methods: {
         handleRegister: function() {
-            fetch(`${this.URL}/auth/users/register/`, {
+            fetch(`${this.$route.query.URL}/auth/users/register/`, {
                 method: 'post',
                 headers: {
                     'Content-Type': 'application/json'
@@ -61,19 +61,24 @@ export default {
                     alert('Try again')
                 }
             })
+            .then(data => {
+                if (data) {
+                    this.$router.push('/Products')
+                }
+            })
         }
     }
 }
 
 </script>
 <style>
-.for_signup{
+/* .for_signup{
     background-image: url(https://res.cloudinary.com/g31ssa/image/upload/c_scale,w_1280/v1600392889/markus-spiske-4W5WWKaxsKs_of0j8z.jpg);
     opacity:0.4;
     background-position: center;
     background-repeat: no-repeat;
     padding:50px;
-}
+} */
 .actual_form{
     margin:0;
     padding:60px;
