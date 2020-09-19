@@ -1,20 +1,32 @@
 <template>
-  <div id="container_products">
+  <div>
         <!-- <div id="decorative_image"></div> -->
         <h2 id="h2_shopping">Create your category</h2>
         <div class="field_for_category">
-            <b-input placeholder="Enter you category..."></b-input>
+            <b-input v-model="name"  placeholder="Enter you category..."></b-input>
             <button class=" create button is-primary" @click="newCategory" >Create</button>
-            <button class=" edit button is-primary" >Edit</button>
+            <!-- <button class=" edit button is-primary" >Edit</button> -->
             <!-- <button class=" edit button is-primary" @click="deleteCategory"> Delete </button> -->
         </div>
-        <ul class="category_buttons">
-            <li v-for="category of categories" v-bind:key="category.id">
-            <button class="button is-info" id= "green" >{{category.name}}</button>
-            </li>
-        </ul>
 
-        <div class="products_list">
+        <div class="container_categories">
+            <ul class="category_buttons">
+                <li  v-for="category of categories" v-bind:key="category.id" >
+                <button class="button is-info" v-bind:id="category.id" @click=getProducts>{{category.name}}</button>
+                </li>
+            </ul>
+        </div>
+
+        <div class="conatiner_products">
+            <ul class="products_list">
+                <li v-for="product of products" v-bind:key="product.id">
+                <div>
+                    {{product.image}}{{product.description}}{{product.category}}
+                </div>
+                <button class=" edit button is-primary" >Edit</button>
+                <button class=" edit button is-primary" >Delete</button>
+                </li>
+            </ul>
         </div>
   
   </div>
@@ -27,8 +39,10 @@ export default{
             categories:[],
             name:'',
             products:[],
+            description:'',
+            image:'',
+            category:'',
             comments:[],
-            category_id:'',
         }
     },
     created: function(){
@@ -37,6 +51,7 @@ export default{
     methods:{
     newCategory: function(){
       const {token, URL} = this.$route.query
+      console.log(this.name)
       fetch(`${URL}/api/categories/`, {
         method: 'post',
         headers: {
@@ -67,10 +82,11 @@ export default{
             console.log(data)
         })
     },
-    getProducts: function(){
+    getProducts: function(event){
         const {token, URL} = this.$route.query
-        this.category_id=event.target.id
-        fetch(`${URL}/api/categories/${event.target.id}/products`, {
+        const id = event.target.id
+        
+        fetch(`${URL}/api/categories/${id}/products`, {
             method: 'get',
             headers: {
                 authorization: `JWT ${token}`,
@@ -189,11 +205,11 @@ li{
     width: 82px;
     height: 40px;
 }
-#green{
+/* #green{
     color:white;
     width:auto;
     margin:10px;
-}
+} */
 .category_buttons{
     display:flex;
     flex-direction: row;
