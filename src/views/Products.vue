@@ -14,9 +14,7 @@
             </li>
         </ul>
 
-
-        <div class="categories_list">
-      
+        <div class="products_list">
         </div>
   
   </div>
@@ -30,6 +28,7 @@ export default{
             name:'',
             products:[],
             comments:[],
+            category_id:'',
         }
     },
     created: function(){
@@ -49,7 +48,10 @@ export default{
       .then(() => {
         this.getCategories()
         // this.name = ''
-      });
+      })
+      .catch(err =>
+       console.log(err)
+      );
     },
     getCategories: function(){
         const {token, URL} = this.$route.query
@@ -64,7 +66,23 @@ export default{
             this.categories = data
             console.log(data)
         })
-    }
+    },
+    getProducts: function(){
+        const {token, URL} = this.$route.query
+        this.category_id=event.target.id
+        fetch(`${URL}/api/categories/${event.target.id}/products`, {
+            method: 'get',
+            headers: {
+                authorization: `JWT ${token}`,
+            }
+        })
+        .then((response) => response.json())
+        .then((data) => {
+            this.products = data
+            console.log(data)
+        })
+    },
+
 //     editCategory: function(){
 //         const {token, URL} = this.$route.query
 //         const id = this.editid
