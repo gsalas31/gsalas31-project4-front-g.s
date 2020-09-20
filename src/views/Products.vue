@@ -3,16 +3,17 @@
         <!-- <div id="decorative_image"></div> -->
         <h2 id="h2_shopping">Create your category</h2>
         <div class="field_for_category">
-            <b-input v-model="name"  placeholder="Enter you category..."></b-input>
+            <b-input v-model="name" placeholder="Enter you category..."></b-input>
             <button class=" create button is-primary" @click="newCategory" >Create</button>
             <!-- <button class=" edit button is-primary" >Edit</button> -->
-            <!-- <button class=" edit button is-primary" @click="deleteCategory"> Delete </button> -->
+            <button class="edit button is-primary green" @click="deleteCategory"> Delete </button>
         </div>
 
         <div class="container_categories">
             <ul class="category_buttons">
                 <li  v-for="category of categories" v-bind:key="category.id" >
                 <button class="button is-info" v-bind:id="category.id" @click=getProducts>{{category.name}}</button>
+                <label>{{category.owner}}</label>
                 </li>
             </ul>
         </div>
@@ -38,6 +39,7 @@ export default{
         return{
             categories:[],
             name:'',
+            owner:'',
             products:[],
             description:'',
             image:'',
@@ -82,6 +84,21 @@ export default{
             console.log(data)
         })
     },
+    deleteCategory: function(event){
+        const {token, URL} = this.$route.query;
+        const id = event.target.id;
+
+        fetch(`${URL}/api/categories/${id}/`, {
+            method: "delete",
+            headers: {
+                authorization: `JWT ${token}`,
+                "Content-Type": "application/json",
+            },
+        })
+        .then(() => {
+            this.getCategories();
+        })
+    },
     getProducts: function(event){
         const {token, URL} = this.$route.query
         const id = event.target.id
@@ -114,22 +131,7 @@ export default{
 //         this.getCategory();
 //         })
 //     },
-//     deleteCategory: function(event){
-//         const {token, URL} = this.$route.query;
-//         const id = event.target.id;
-
-//         fetch(`${URL}/api/categories/${id}/`, {
-//             method: "delete",
-//             headers: {
-//                 authorization: `JWT ${token}`,
-//                 "Content-Type": "application/json",
-//             },
-//         })
-//         .then(() => {
-//             this.getCategories();
-//         })
 //   }
-
 //   }
     }
 }
@@ -205,19 +207,17 @@ li{
     width: 82px;
     height: 40px;
 }
-/* #green{
+.green{
     color:white;
     width:auto;
     margin:10px;
-} */
+}
 .category_buttons{
     display:flex;
     flex-direction: row;
     flex-wrap: wrap;
     margin-top: 20px;
     justify-content: center;
-
-
 }
 
 </style>
