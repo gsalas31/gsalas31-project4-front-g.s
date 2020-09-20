@@ -11,9 +11,9 @@
 
         <div class="container_categories">
             <ul class="category_buttons">
-                <li  v-for="category of categories" v-bind:key="category.id" >
+                <li  id="lista" v-for="category of categories" v-bind:key="category.id" >
                 <button class="button is-info" v-bind:id="category.id" @click=getProducts>{{category.name}}</button>
-                <label>{{category.owner}}</label>
+                <label>by:{{category.owner}}</label>
                 </li>
             </ul>
         </div>
@@ -207,11 +207,6 @@ li{
     width: 82px;
     height: 40px;
 }
-.green{
-    color:white;
-    width:auto;
-    margin:10px;
-}
 .category_buttons{
     display:flex;
     flex-direction: row;
@@ -219,5 +214,11 @@ li{
     margin-top: 20px;
     justify-content: center;
 }
-
+.is-info{
+    margin:10px;
+}
+#lista{
+    display: flex;
+    flex-direction: column;
+}
 </style>
