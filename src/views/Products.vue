@@ -41,10 +41,25 @@
                         {{product.description}}
                     </div>
                     <button class="edit button is-primary" >Delete</button>
-                    <button class="edit button is-primary" >Comments</button>
+                    <button class="edit button is-primary" @click=getComments >Comments</button>
                 </li>
             </ul>
         </div>
+
+
+        <div>
+            <ul class="comments_list">
+                <li id="actual-list" v-for="comment of comments" v-bind:key="comment.id">
+                    <div id="comment_product">
+                        {{comment.subject}}
+                        {{comment.the_comment}}
+                    </div>
+                    <button class="edit button is-primary" >Delete</button>
+                </li>
+            </ul>
+        </div>
+
+
 
         
   
@@ -69,6 +84,8 @@ export default{
             image:'',
             category:'',
             comments:[],
+            the_comment: '',
+        
         }
     },
     created: function(){
@@ -159,22 +176,22 @@ export default{
     //    console.log(err)
     //   );
     // },
-    // getComments: function(event){
-    //     const {token, URL} = this.$route.query
-    //     const id = event.target.id
+    getComments: function(event){
+        const {token, URL} = this.$route.query
+        const id = event.target.id
         
-    //     fetch(`${URL}/api/prodcuts/${id}`, {
-    //         method: 'get',
-    //         headers: {
-    //             authorization: `JWT ${token}`,
-    //         }
-    //     })
-    //     .then((response) => response.json())
-    //     .then((data) => {
-    //         this.products = data
-    //         console.log(data)
-    //     })
-    // },
+        fetch(`${URL}/api/products/${id}`, {
+            method: 'get',
+            headers: {
+                authorization: `JWT ${token}`,
+            }
+        })
+        .then((response) => response.json())
+        .then((data) => {
+            this.comments = data
+            console.log(data)
+        })
+    },
 
 
 
