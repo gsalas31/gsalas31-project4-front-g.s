@@ -1,12 +1,10 @@
 <template>
   <div>
         <!-- <div id="decorative_image"></div> -->
-        <h2 id="h2_shopping">Create your category</h2>
+        <h2 id="h2_shopping_main">Create your categories and Products</h2>
         <div class="field_for_category">
             <b-input v-model="name" placeholder="Enter you category..."></b-input>
             <button class=" create button is-primary" @click="newCategory" >Create</button>
-            <!-- <button class=" edit button is-primary" >Edit</button> -->
-            <!-- <button class="edit button is-primary green" @click="deleteCategory"> Delete </button> -->
         </div>
 
         <div class="container_categories">
@@ -14,38 +12,47 @@
                 <li  id="lista" v-for="category of categories" v-bind:key="category.id" >
                 <button class="button is-info" v-bind:id="category.id" @click=getProducts>{{category.name}}</button>
                 <label>by:{{category.owner}}</label>
+
+                <div class="to_hide">
+                    <button class="edit button is-primary green" v-bind:id="category.id" @click="deleteCategory"> Delete</button>
+                    <!-- <button class=" edit button is-primary" >Edit</button> -->
+
+                    <div class="creating_products">
+                        <h2 id="h2_shopping">Create your Product</h2>
+                        <div class="adding_product">
+                                <b-field>
+                                    <b-input v-model="description" value="Product's name"></b-input>
+                                </b-field>
+                                <b-field>
+                                    <b-input v-model="image" value="Image - Enter a valid URL"></b-input>
+                                </b-field>
+                        </div>
+                        <div>
+                            <button class=" create button is-primary" v-bind:id="category.id" @click="newProduct">Create</button>
+                        </div>
+                    </div>
+                </div>
                 </li>
             </ul>
         </div>
-
-        <div>
-            <h2 id="h2_shopping">Create your Product</h2>
-            <div class="adding_product">
-                <!-- <b-input v-model="product" placeholder="Enter product description..."></b-input>  -->
-                <!-- <b-input v-model="url" placeholder="Enter image URL..."></b-input>  -->
-            </div>
-            <div>
-                <button class=" create button is-primary">Create</button>
-                <button class="edit button is-primary green"> Update</button>
-            </div>
-        </div>
-
-
-
-
         <div>
             <ul class="products_list">
                 <li id="actual-list" v-for="product of products" v-bind:key="product.id">
                     <div class="container_products">
-                        <div id="image_product">{{product.image}}</div>
+                        <div id="image_product"><img :src="product.image" :alt="product.description"></div>
                         {{product.description}}
                     </div>
-                    <button class="edit button is-primary" >Delete</button>
-                    <button class="edit button is-primary" @click=getComments >Comments</button>
+                    <button class="edit button is-primary green"> Update</button>
+                    <button class="edit button is-primary" v-bind:id="product.id" v-bind:category="product.category" @click="deleteProduct" >Delete</button>
+                    <button class="edit button is-primary"  @click="getComments" >Comments</button>
+
+
+
+                    
+                    <p v-for="comment of product.comments" v-bind:key="comment.id">{{comment.the_comment}}</p>
                 </li>
             </ul>
         </div>
-
 
         <div>
             <ul class="comments_list">
@@ -59,18 +66,10 @@
             </ul>
         </div>
 
-
-
-        
-  
-
-
-
-
-
-
   </div>
 </template>
+
+
 <script>
 export default{
     name: 'Products',
@@ -84,6 +83,7 @@ export default{
             image:'',
             category:'',
             comments:[],
+            subject: '',
             the_comment: '',
         
         }
@@ -125,21 +125,20 @@ export default{
             console.log(data)
         })
     },
-    // deleteCategory: function(event){
-    //     const {token, URL} = this.$route.query;
-    //     const id = event.target.id;
+    deleteCategory: function(event){
+        const {token, URL} = this.$route.query;
+        const id = event.target.id;
 
-    //     fetch(`${URL}/api/categories/${id}/`, {
-    //         method: "delete",
-    //         headers: {
-    //             authorization: `JWT ${token}`,
-    //             "Content-Type": "application/json",
-    //         },
-    //     })
-    //     .then(() => {
-    //         this.getCategories();
-    //     })
-    // },
+        fetch(`${URL}/api/categories/${id}/`, {
+            method: "delete",
+            headers: {
+                authorization: `JWT ${token}`,
+            },
+        })
+        .then(() => {
+            this.getCategories();
+        })
+    },
     getProducts: function(event){
         const {token, URL} = this.$route.query
         const id = event.target.id
@@ -156,26 +155,40 @@ export default{
             console.log(data)
         })
     },
-    // newProduct: function(){
-    //   const {token, URL} = this.$route.query
-    //   console.log(this.product)
+    deleteProduct: function(event){
+        const {token, URL} = this.$route.query;
+        const id = event.target.id;
+        const category= event.target.category;
 
-    //   fetch(`${URL}/api/categories/`, {
-    //     method: 'post',
-    //     headers: {
-    //        "Content-Type": "application/json", 
-    //         authorization: `JWT ${token}`
-    //     },
-    //     body: JSON.stringify({ name: this.name})
-    //   })
-    //   .then(() => {
-    //     this.getCategories()
-    //     this.name = ''
-    //   })
-    //   .catch(err =>
-    //    console.log(err)
-    //   );
-    // },
+        fetch(`${URL}/api/products/${id}/`, {
+            method: "delete",
+            headers: {
+                authorization: `JWT ${token}`,
+            },
+        })
+        .then(() => {
+            this.getProducts({target:{id:category}});
+        })
+    },
+    newProduct: function(){
+      const {token, URL} = this.$route.query
+      fetch(`${URL}/api/products/`, {
+        method: 'post',
+        headers: {
+           "Content-Type": "application/json", 
+            authorization: `JWT ${token}`
+        },
+        body: JSON.stringify({ image: this.image}, {description:this.description})
+      })
+      .then(() => {
+        this.getProducts()
+        this.image = '',
+        this.description =''
+      })
+      .catch(err =>
+       console.log(err)
+      )
+    },    
     getComments: function(event){
         const {token, URL} = this.$route.query
         const id = event.target.id
@@ -192,49 +205,25 @@ export default{
             console.log(data)
         })
     },
-
-
-
-
-
-
-
-
-
-
-    // deleteProduct: function(event){
-    //     const {token, URL} = this.$route.query;
-    //     const id = event.target.id;
-
-    //     fetch(`${URL}/api/categories/${id}/`, {
-    //         method: "delete",
-    //         headers: {
-    //             authorization: `JWT ${token}`,
-    //             "Content-Type": "application/json",
-    //         },
-    //     })
-    //     .then(() => {
-    //         this.getCategories();
-    //     })
-    // },
-
-//     editCategory: function(){
-//         const {token, URL} = this.$route.query
-//         const id = this.editid
-//         fetch(`${URL}/api/categories/${id}/`, {
-//         method: "put",
-//         headers: {
-//             authorization: `jwt ${token}`,
-//             "Content-Type": "application/json"
-//             },
-//          body: JSON.stringify({title: this.edittitle})
-//         })
-//         .then(() => {
-//         this.getCategory();
-//         })
-//     },
-//   }
-//   }
+    newComment: function(){
+      const {token, URL} = this.$route.query
+      console.log(this.the_comment)
+      fetch(`${URL}/api/categories/`, {
+        method: 'post',
+        headers: {
+           "Content-Type": "application/json", 
+            authorization: `JWT ${token}`
+        },
+        body: JSON.stringify({ name: this.name})
+      })
+      .then(() => {
+        this.getCategories()
+        this.name = ''
+      })
+      .catch(err =>
+       console.log(err)
+      );
+    },
     }
 }
 </script>
@@ -247,10 +236,15 @@ export default{
     background-repeat: no-repeat;
     margin-top: 0px;
 } */
+#h2_shopping_main{
+    color:#232653;
+    font-size: 30px;
+    margin:20px;
 
+} 
 #h2_shopping{
     color:#232653;
-    font-size: 26px;
+    font-size: 20px;
     margin:20px;
 }
 li{
@@ -322,6 +316,9 @@ li{
 #lista{
     display: flex;
     flex-direction: column;
+    justify-content: center;
+    margin:20px;
+    
 }
 .container_products{
     color:#232653;
@@ -346,8 +343,15 @@ li{
 .adding_product{
     display:flex;
     flex-direction: column;
-    width:50%;
+    width:80%;
     margin-left: auto;
     margin-right: auto;
+}
+.creating_products{
+    border: solid #9DB7C7 3px;
+}
+.deleting_button_category{
+    width:100px;
+
 }
 </style>
