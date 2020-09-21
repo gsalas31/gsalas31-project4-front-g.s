@@ -52,10 +52,12 @@
                         {{product.description}}
                     </div>
                     <!-- <button class="edit button is-primary green"> Update</button> -->
-                    <b-input v-model="subject" value="subject" placeholder="Subject"></b-input>
-                    <b-input v-model="the_comment" value="review" placeholder="Leave a Review"></b-input>
-                    <button class="edit button is-primary"  @click="newComment" >Add Review</button>
-                    <button class="edit button is-primary" v-bind:id="product.id" v-bind:category="product.category" @click="deleteProduct" >Delete</button>
+                        <div class="inputs_for_comments">
+                            <b-input v-model="subject" value="subject" placeholder="Subject" ></b-input>
+                            <b-input v-model="the_comment" value="review" placeholder="Leave a Review"></b-input>
+                        </div>
+                        <button class="edit button is-primary" v-bind:id="product.id"  @click="newComment" >Add Review</button>
+                        <button class="edit button is-primary" v-bind:id="product.id" v-bind:category="product.category" @click="deleteProduct" >Delete</button>
                     <!-- <button class="edit button is-primary"  @click="getComments">Comments</button> -->
                     <ul>
                         <li  v-for="comment of product.comments" v-bind:key="comment.id">
@@ -99,7 +101,7 @@ export default{
             comments:[],
             subject: '',
             the_comment: '',
-        
+            add_comment_id:null,        
         }
     },
     created: function(){
@@ -124,6 +126,9 @@ export default{
       .catch(err =>
        console.log(err)
       );
+    },
+    addComment: function(id){
+        this.add_comment_id = id
     },
     getCategories: function(){
         const {token, URL} = this.$route.query
@@ -172,7 +177,7 @@ export default{
     deleteProduct: function(event){
         const {token, URL} = this.$route.query;
         const id = event.target.id;
-        const category= event.target.category;
+        // const category= event.target.category;
 
         fetch(`${URL}/api/products/${id}/`, {
             method: "delete",
@@ -181,18 +186,22 @@ export default{
             },
         })
         .then(() => {
-            this.getProducts({target:{id:category}});
+            // this.getProducts({target:{id:category}});
+            this.getProducts();
+
         })
     },
     newProduct: function(){
       const {token, URL} = this.$route.query
-      fetch(`${URL}/api/products/`, {
+      const id = event.target.id
+
+      fetch(`${URL}/api/categories/${id}/products`, {
         method: 'post',
         headers: {
            "Content-Type": "application/json", 
             authorization: `JWT ${token}`
         },
-        body: JSON.stringify({ image: this.image}, {description:this.description})
+        body: JSON.stringify({ image: this.image, description:this.description, category: id})
       })
       .then(() => {
         this.getProducts()
@@ -228,7 +237,7 @@ export default{
            "Content-Type": "application/json", 
             authorization: `JWT ${token}`
         },
-        body: JSON.stringify({ name: this.name})
+        body: JSON.stringify({ subject: this.subject, the_comment: this.the_comment, product:id})
       })
       .then(() => {
         this.getCategories()
