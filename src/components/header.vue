@@ -47,4 +47,7 @@ export default {
 .navbar-item{
   font-size: 30px;
 }
+.router-link-exact-active {
+  color:RGB(186, 175, 172);
+}
 </style>

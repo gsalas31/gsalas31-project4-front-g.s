@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="main">
         <div id="decorative_image"></div>
         <h2 id="h2_shopping_main">Create your categories and Products</h2>
         <div class="field_for_category">
@@ -267,14 +267,14 @@ export default{
 </script>
 
 <style>
-#decorative_image{
+/* #decorative_image{
     background-image:url(https://res.cloudinary.com/g31ssa/image/upload/c_scale,w_1800/v1600108797/Screen_Shot_2020-09-14_at_2.39.30_PM_wvwi6p.png);
     height: 200px;
     width: 100%;
     background-position: center;
     background-repeat: no-repeat;
     margin-top: 0px;
-}
+} */
 #h2_shopping_main{
     color:#232653;
     font-size: 30px;
@@ -290,7 +290,7 @@ li{
     width:320px;
     border-radius: 8px;
     padding: 8px;
-    color: white;
+    color:rgb(186, 175, 172);
     text-align: center;
 }
 #options_products{
@@ -332,7 +332,7 @@ li{
     
 }
 .container_products{
-    color:#232653;
+    color:rgb(186, 175, 172);
 }
 .products_list{
     display: flex;
@@ -346,8 +346,8 @@ li{
 }
 #image_product{
     height: 460px;
-    border: solid  #AC88BF  10px;
-    background-color: #AC88BF;
+    border: solid rgb(186, 175, 172)  10px;
+    background-color: rgb(186, 175, 172);
 
 }
 .edit{
@@ -378,6 +378,10 @@ img{
 }
 .comments{
     padding:10px;
+    color: gray;
 }
-
+.main{
+    background-image: url(https://res.cloudinary.com/g31ssa/image/upload/v1600719294/nynne-schroder-FmBip7Z9yvQ-unsplash_gorfty.jpg);
+    background-position: center;
+}
 </style>

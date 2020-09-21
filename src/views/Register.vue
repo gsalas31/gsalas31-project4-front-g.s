@@ -63,7 +63,7 @@ export default {
             })
             .then(data => {
                 if (data) {
-                    this.$router.push('/Products')
+                    this.$router.push('/Login')
                 }
             })
         }
