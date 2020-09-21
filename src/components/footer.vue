@@ -1,15 +1,9 @@
 <template>
-<div>
-<!-- <footer class="footer">
-  <div class="content has-text-centered">
-    <p>
-      <strong>Bulma</strong> by <a href="https://jgthms.com">Jeremy Thomas</a>. The source code is licensed
-      <a href="http://opensource.org/licenses/mit-license.php">MIT</a>. The website content
-      is licensed <a href="http://creativecommons.org/licenses/by-nc-sa/4.0/">CC BY NC SA 4.0</a>.
-    </p>
-  </div>
-</footer> -->
-</div>
+  <footer class="footer">
+      <p>
+        <strong>Fantasy Foami</strong> by <a href="https://www.facebook.com/Fantasy-foami-1440866066230138">Fantasy Foami</a>.
+      </p>
+  </footer>
 </template>
 
 <script>
@@ -19,4 +13,8 @@ export default {
 </script>
 
 <style>
+footer{
+  width:100%;
+  background-image: url(https://res.cloudinary.com/g31ssa/image/upload/v1600140492/back8_oc32qb.jpg);
+}
 </style>

@@ -1,6 +1,6 @@
 <template>
   <div>
-        <!-- <div id="decorative_image"></div> -->
+        <div id="decorative_image"></div>
         <h2 id="h2_shopping_main">Create your categories and Products</h2>
         <div class="field_for_category">
             <b-input v-model="name" placeholder="Enter you category..."></b-input>
@@ -53,9 +53,9 @@
                     </div>
                     <!-- <button class="edit button is-primary green"> Update</button> -->
                     <button class="edit button is-primary" v-bind:id="product.id" v-bind:category="product.category" @click="deleteProduct" >Delete</button>
-                    <button class="edit button is-primary"  @click="getComments">Comments</button>
+                    <!-- <button class="edit button is-primary"  @click="getComments">Comments</button> -->
                     <div class="div_of_comments">
-                        <p class="comments" v-for="comment of product.comments" v-bind:key="comment.id">{{comment.the_comment}}</p>
+                        <p class="comments" v-for="comment of product.comments" v-bind:key="comment.id">{{comment.the_comment}} <br/> <b>-{{comment.owner}}</b></p>
                         <button class="edit button is-primary">Delete</button>
                     </div>
                 </li>
@@ -237,14 +237,14 @@ export default{
 }
 </script>
 <style>
-/* #decorative_image{
+#decorative_image{
     background-image:url(https://res.cloudinary.com/g31ssa/image/upload/c_scale,w_1800/v1600108797/Screen_Shot_2020-09-14_at_2.39.30_PM_wvwi6p.png);
-    height: 160px;
+    height: 200px;
     width: 100%;
     background-position: center;
     background-repeat: no-repeat;
     margin-top: 0px;
-} */
+}
 #h2_shopping_main{
     color:#232653;
     font-size: 30px;
@@ -315,9 +315,10 @@ li{
     margin: 20px;
 }
 #image_product{
-    height: 400px;
+    height: 480px;
     border: solid  #AC88BF  10px;
     background-color: #AC88BF;
+
 }
 .edit{
     width:96px;
@@ -330,7 +331,6 @@ li{
     
 }
 .creating_products{
-    border: solid #9DB7C7 3px;
     width: auto;
     padding:10px;
 }
