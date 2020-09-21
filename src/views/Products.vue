@@ -52,6 +52,9 @@
                         {{product.description}}
                     </div>
                     <!-- <button class="edit button is-primary green"> Update</button> -->
+                    <b-input v-model="subject" value="subject" placeholder="Subject"></b-input>
+                    <b-input v-model="the_comment" value="review" placeholder="Leave a Review"></b-input>
+                    <button class="edit button is-primary"  @click="newComment" >Add Review</button>
                     <button class="edit button is-primary" v-bind:id="product.id" v-bind:category="product.category" @click="deleteProduct" >Delete</button>
                     <!-- <button class="edit button is-primary"  @click="getComments">Comments</button> -->
                     <ul>
@@ -218,8 +221,8 @@ export default{
     },
     newComment: function(){
       const {token, URL} = this.$route.query
-      console.log(this.the_comment)
-      fetch(`${URL}/api/categories/`, {
+      const id = event.target.id
+      fetch(`${URL}/api/categories/${id}/products/${id}/comments`, {
         method: 'post',
         headers: {
            "Content-Type": "application/json", 
