@@ -13,24 +13,33 @@
                 <button class="button is-info" v-bind:id="category.id" @click=getProducts>{{category.name}}</button>
                 <label>by:{{category.owner}}</label>
 
-                <div class="to_hide">
+                <div>
                     <button class="edit button is-primary green" v-bind:id="category.id" @click="deleteCategory"> Delete</button>
                     <!-- <button class=" edit button is-primary" >Edit</button> -->
-
-                    <div class="creating_products">
-                        <h2 id="h2_shopping">Create your Product</h2>
-                        <div class="adding_product">
-                                <b-field>
-                                    <b-input v-model="description" value="Product's name"></b-input>
-                                </b-field>
-                                <b-field>
-                                    <b-input v-model="image" value="Image - Enter a valid URL"></b-input>
-                                </b-field>
-                        </div>
-                        <div>
-                            <button class=" create button is-primary" v-bind:id="category.id" @click="newProduct">Create</button>
-                        </div>
-                    </div>
+                        <section>
+                            <b-collapse :open="false" aria-id="contentIdForA11y1">
+                                <button
+                                    class="button is-primary"
+                                    slot="trigger"
+                                    aria-controls="contentIdForA11y1">CREATE YOUR PRODUCT</button>
+                                <div class="notification">
+                                    <div class="creating_products">
+                                        <h2 id="h2_shopping">Create your Product</h2>
+                                        <div class="adding_product">
+                                                <b-field>
+                                                    <b-input v-model="description" value="Product's name"></b-input>
+                                                </b-field>
+                                                <b-field>
+                                                    <b-input v-model="image" value="Image - Enter a valid URL"></b-input>
+                                                </b-field>
+                                        </div>
+                                        <div>
+                                            <button class=" create button is-primary" v-bind:id="category.id" @click="newProduct">Create</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </b-collapse>
+                        </section>
                 </div>
                 </li>
             </ul>
@@ -39,32 +48,31 @@
             <ul class="products_list">
                 <li id="actual-list" v-for="product of products" v-bind:key="product.id">
                     <div class="container_products">
-                        <div id="image_product"><img :src="product.image" :alt="product.description"></div>
+                        <div id="image_product"><img :src="product.image" :alt="product.description "></div>
                         {{product.description}}
                     </div>
-                    <button class="edit button is-primary green"> Update</button>
+                    <!-- <button class="edit button is-primary green"> Update</button> -->
                     <button class="edit button is-primary" v-bind:id="product.id" v-bind:category="product.category" @click="deleteProduct" >Delete</button>
-                    <button class="edit button is-primary"  @click="getComments" >Comments</button>
-
-
-
-                    
-                    <p v-for="comment of product.comments" v-bind:key="comment.id">{{comment.the_comment}}</p>
+                    <button class="edit button is-primary"  @click="getComments">Comments</button>
+                    <div class="div_of_comments">
+                        <p class="comments" v-for="comment of product.comments" v-bind:key="comment.id">{{comment.the_comment}}</p>
+                        <button class="edit button is-primary">Delete</button>
+                    </div>
                 </li>
             </ul>
         </div>
 
-        <div>
+        <!-- <div>
             <ul class="comments_list">
-                <li id="actual-list" v-for="comment of comments" v-bind:key="comment.id">
+                <li id="actual-list" v-for="comment of comments" v-bind:key="the_comment.id">
                     <div id="comment_product">
                         {{comment.subject}}
-                        {{comment.the_comment}}
+                        {{getComments.the_comment}}
                     </div>
                     <button class="edit button is-primary" >Delete</button>
                 </li>
             </ul>
-        </div>
+        </div> -->
 
   </div>
 </template>
@@ -223,7 +231,8 @@ export default{
       .catch(err =>
        console.log(err)
       );
-    },
+    }
+
     }
 }
 </script>
@@ -248,41 +257,11 @@ export default{
     margin:20px;
 }
 li{
-    width:260px;
+    width:320px;
     border-radius: 8px;
     padding: 8px;
     color: white;
     text-align: center;
-}
-#school{
-    background-color: #AC88BF;
-    margin-bottom: 10px;
-    margin-left: auto;
-    margin-right: auto;
-}
-#home{
-    background-color: #9DB7C7;
-    margin-bottom: 10px;
-    margin-left: auto;
-    margin-right: auto;
-}
-#christmas{
-    background-color: #D2618C;
-    margin-bottom: 10px;
-    margin-left: auto;
-    margin-right: auto;
-}
-#birthday{
-    background-color:#F7E0F4 ;
-    margin-bottom: 10px;
-    margin-left: auto;
-    margin-right: auto;
-}
-#other{
-    background-color: #232653;
-    margin-bottom: 20px;
-    margin-left: auto;
-    margin-right: auto;
 }
 #options_products{
     display:flex;
@@ -318,6 +297,8 @@ li{
     flex-direction: column;
     justify-content: center;
     margin:20px;
+    box-shadow: 2px 2px 4px #000000;
+    padding:16px;
     
 }
 .container_products{
@@ -334,8 +315,9 @@ li{
     margin: 20px;
 }
 #image_product{
-    height: 300px;
-    border: solid  #AC88BF  2px;
+    height: 400px;
+    border: solid  #AC88BF  10px;
+    background-color: #AC88BF;
 }
 .edit{
     width:96px;
@@ -343,15 +325,30 @@ li{
 .adding_product{
     display:flex;
     flex-direction: column;
-    width:80%;
-    margin-left: auto;
-    margin-right: auto;
+    width:auto;
+    margin-right: 16px;
+    
 }
 .creating_products{
     border: solid #9DB7C7 3px;
+    width: auto;
+    padding:10px;
 }
 .deleting_button_category{
     width:100px;
 
 }
+img{
+    height:300px ;
+}
+.div_of_comments{
+    margin:20px;
+    box-shadow: 2px 2px 4px #000000;
+    color:grey;
+}
+.comments{
+    padding:10px;
+}
+
+
 </style>
