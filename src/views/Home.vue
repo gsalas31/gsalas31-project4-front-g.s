@@ -1,37 +1,35 @@
 <template>
-  <div class="home">
-    <div id="intro_landing_page_first_part">
-        <div id="first_content">
-            <h1 class="name_of_app">FANTASY FOAMI</h1>
-            <h2 class="slogan">Create</h2>
-            <h2 class="slogan">Share</h2>
-            <h2 class="slogan">Enjoy</h2>
-            <p id="description_intro"> A little descritption of the app</p>
+    <div class="home">
+        <div id="intro_landing_page_first_part">
+            <div id="first_content">
+                    <h1 class="name_of_app">FANTASY FOAMI</h1>
+                    <h2 class="slogan">Create</h2>
+                    <h2 class="slogan">Share</h2>
+                    <h2 class="slogan">Enjoy</h2>
+                    <p id="description_intro"> A place were you can display your work and reach happy clients!</p>
+            </div>
+        </div>
+
+        <div id="intro_sencond_part">
+            <div class="second_part_benefits">
+                <div id="characteristic_one">
+                    <h2>Have your products displayed and ready for others to see </h2>
+                    <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Exercitationem cumque repellat vitae illum labore sunt dignissimos! .</p>
+                </div>
+                <div id="image_description_one">
+                </div>
+            </div>
+
+            <div class="second_part_benefits" id="second">
+                <div id="image_description_two">
+                </div>
+                <div id="characteristic_two">
+                    <h2>Share your thougths with a big community</h2>
+                    <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Exercitationem cumque repellat vitae illum labore sunt dignissimos! .</p>
+                </div>
+            </div>
         </div>
     </div>
-
-
-
-    <div id="intro_sencond_part">
-        <div class="second_part_benefits">
-            <div id="characteristic_one">
-                <h2>Have your products displayed and ready for others to see </h2>
-                <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Exercitationem cumque repellat vitae illum labore sunt dignissimos! .</p>
-            </div>
-            <div id="image_description_one">
-            </div>
-        </div>
-
-        <div class="second_part_benefits" id="second">
-            <div id="image_description_two">
-            </div>
-            <div id="characteristic_two">
-                <h2>Share your thougths with a big community</h2>
-                <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Exercitationem cumque repellat vitae illum labore sunt dignissimos! .</p>
-            </div>
-        </div>
-    </div>
-  </div>
 </template>
 
 <script>
@@ -43,32 +41,28 @@ export default {
 }
 </script>
 <style>
-.home{
-  margin-top: 90px;
-}
 #intro_landing_page_first_part{
     background-image: url(https://res.cloudinary.com/g31ssa/image/upload/v1600108797/Screen_Shot_2020-09-14_at_2.39.30_PM_wvwi6p.png) ;
     width: 100%;
-    height: auto;
+    height: 40%;
     background-position: center;
     object-fit: cover;
     padding: 20px 0px;
     background-repeat: no-repeat;
     margin-top: 0px ;
-
+    display: flex;
+    justify-content: center;
 }
 #first_content{
     background-color: RGBA(256, 256, 256, 0.5);
-    width: 220px;
+    width: 60%;
     height: auto;
     padding:20px;
     display: flex;
     flex-direction: column;
     text-align: center;
-    margin-right: auto;
-    margin-left: auto;
-    margin-top:80px ;
-    margin-bottom: 80px;
+    align-items: center;
+
 }
 .name_of_app{
     font-size: 36px;
@@ -87,24 +81,24 @@ export default {
 /* SECOND PART------- */
 #intro_sencond_part{
     display:flex;
-    flex-direction: column;
+    flex-direction: row;
+    flex-wrap: wrap;
+    margin-top: 20px;
+    justify-content: center;
+    margin-bottom: 40px;
 }
 h2{
     font-size: 18px;
 }
 .second_part_benefits{
     display: flex;
-    flex-direction: column;
+    flex-direction: row-reverse;
     height: auto;
     margin-top: 30px;
-    margin-left: auto;
-    margin-right: auto;
 }
-#second{
-    flex-direction: column-reverse;
-}
-#characteristic_one, #characteristic_two{
-    width: 250px;
+
+#characteristic_one, #characteristic_two {
+    width: 50%;
     height: auto;
     margin: 20px;
     border-radius: 10px;
@@ -133,6 +127,9 @@ h2{
     margin:20px;
     padding:10px;
     background-repeat: no-repeat;
+}
+.home{
+    width: 100%;
 }
 
 </style>
