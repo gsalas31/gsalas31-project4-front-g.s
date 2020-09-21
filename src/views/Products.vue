@@ -27,10 +27,10 @@
                                         <h2 id="h2_shopping">Create your Product</h2>
                                         <div class="adding_product">
                                                 <b-field>
-                                                    <b-input v-model="description" value="Product's name"></b-input>
+                                                    <b-input v-model="description" placeholder="Product's Name" value="Product's name" ></b-input>
                                                 </b-field>
                                                 <b-field>
-                                                    <b-input v-model="image" value="Image - Enter a valid URL"></b-input>
+                                                    <b-input v-model="image" placeholder="Insert URL" value="Image - Enter a valid URL"></b-input>
                                                 </b-field>
                                         </div>
                                         <div>
@@ -54,10 +54,14 @@
                     <!-- <button class="edit button is-primary green"> Update</button> -->
                     <button class="edit button is-primary" v-bind:id="product.id" v-bind:category="product.category" @click="deleteProduct" >Delete</button>
                     <!-- <button class="edit button is-primary"  @click="getComments">Comments</button> -->
-                    <div class="div_of_comments">
-                        <p class="comments" v-for="comment of product.comments" v-bind:key="comment.id">{{comment.the_comment}} <br/> <b>-{{comment.owner}}</b></p>
-                        <button class="edit button is-primary">Delete</button>
-                    </div>
+                    <ul>
+                        <li  v-for="comment of product.comments" v-bind:key="comment.id">
+                            <div class="div_of_comments">
+                            <p class="comments" >{{comment.the_comment}} <br/> <b>-{{comment.owner}}</b></p>
+                            <button class="edit button is-primary" v-bind:id="comment.id" @click="deleteComment">Delete</button>
+                            </div>
+                        </li>
+                    </ul>
                 </li>
             </ul>
         </div>
@@ -76,7 +80,6 @@
 
   </div>
 </template>
-
 
 <script>
 export default{
@@ -231,11 +234,26 @@ export default{
       .catch(err =>
        console.log(err)
       );
-    }
+    },
+    deleteComment: function(event){
+        const {token, URL} = this.$route.query;
+        const id = event.target.id;
+
+        fetch(`${URL}/api/comments/${id}/`, {
+            method: "delete",
+            headers: {
+                authorization: `JWT ${token}`,
+            },
+        })
+        .then(() => {
+            this.getComments();
+        })
+    },
 
     }
 }
 </script>
+
 <style>
 #decorative_image{
     background-image:url(https://res.cloudinary.com/g31ssa/image/upload/c_scale,w_1800/v1600108797/Screen_Shot_2020-09-14_at_2.39.30_PM_wvwi6p.png);
@@ -315,7 +333,7 @@ li{
     margin: 20px;
 }
 #image_product{
-    height: 480px;
+    height: 460px;
     border: solid  #AC88BF  10px;
     background-color: #AC88BF;
 
@@ -349,6 +367,5 @@ img{
 .comments{
     padding:10px;
 }
-
 
 </style>
